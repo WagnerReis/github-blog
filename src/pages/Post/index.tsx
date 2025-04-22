@@ -4,13 +4,16 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { MarkdownRenderer } from "../../components/MarkdownRenderer";
 import { markdownFormatter } from "../../utils/markdownFormatter";
+import { useNavigate } from "react-router-dom";
 
 export function Post() {
+  const navigate = useNavigate();
+
   return (
     <>
       <HeaderContainer>
         <NavBar>
-          <button>
+          <button onClick={() => navigate(-1)}>
             <MdOutlineKeyboardArrowLeft size={20} />
             <p>VOLTAR</p>
           </button>
@@ -44,7 +47,6 @@ export function Post() {
 }
 
 const markdown = `# React + TypeScript + Vite
-
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
