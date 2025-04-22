@@ -94,3 +94,12 @@ export const Info = styled.div`
     }
   }
 `;
+
+export const ContentContainer = styled.div`
+  width: 54rem;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: ${(props) => props.theme["base-text"]};
+`;

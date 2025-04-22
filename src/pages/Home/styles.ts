@@ -52,7 +52,7 @@ export const Card = styled.div`
   background-color: ${(props) => props.theme["base-post"]};
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid transparent;
   cursor: pointer;
 
