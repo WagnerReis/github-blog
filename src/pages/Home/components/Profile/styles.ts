@@ -40,6 +40,7 @@ export const Details = styled.div`
       line-height: 1.3;
       color: ${(props) => props.theme["base-title"]};
     }
+
     a {
       display: flex;
       align-items: center;
@@ -47,8 +48,9 @@ export const Details = styled.div`
 
       text-decoration: none;
       font-weight: 600;
-      color: ${(props) => props.theme.blue};
+      font-size: 0.75rem;
       line-height: 1.6;
+      color: ${(props) => props.theme.blue};
 
       svg {
         color: ${(props) => props.theme.blue};

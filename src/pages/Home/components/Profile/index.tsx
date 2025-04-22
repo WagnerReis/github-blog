@@ -22,9 +22,9 @@ export function Profile() {
         <Details>
           <header>
             <h2>Wagner Reis</h2>
-            <a href="https://github.com/WagnerReis">
+            <a href="https://github.com/WagnerReis" target="_blank">
               <p>GITHUB</p>
-              <FaArrowUpRightFromSquare size={14} />
+              <FaArrowUpRightFromSquare size={12} />
             </a>
           </header>
 
