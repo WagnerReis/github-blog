@@ -15,7 +15,7 @@ interface IssueItem {
 }
 
 interface IssueItemResponse {
-  id: number;
+  number: number;
   title: string;
   body: string;
   created_at: Date;
@@ -26,9 +26,19 @@ interface Issue {
   items: IssueItem[];
 }
 
+interface IssueContent {
+  title: string;
+  owner: string;
+  body: string;
+  url: string;
+  comments: number;
+  createdAt: Date;
+}
+
 interface IssuesContextType {
   issues: Issue;
   fetchIssues: (query?: string) => Promise<void>;
+  fetchExpecificIssue: (id: string) => Promise<IssueContent | null>;
 }
 
 interface IssuesContextProviderProps {
@@ -52,7 +62,7 @@ export function IssuesContextProvider({
         totalCount: response.data.total_count,
         items: response.data.items.map((item: IssueItemResponse) => {
           return {
-            id: item.id,
+            id: item.number,
             title: item.title,
             body: item.body,
             createdAt: new Date(item.created_at),
@@ -62,7 +72,29 @@ export function IssuesContextProvider({
 
       setIssues(newIssue);
     } catch (err) {
-      console.log(err);
+      console.error(err);
+    }
+  }, []);
+
+  const fetchExpecificIssue = useCallback(async (id: string) => {
+    try {
+      const response = await api.get(
+        `repos/WagnerReis/github-blog/issues/${id}`,
+      );
+
+      const content = {
+        title: response.data.title,
+        owner: response.data.user.login,
+        body: response.data.body,
+        url: response.data.html_url,
+        comments: response.data.comments,
+        createdAt: new Date(response.data.created_at),
+      };
+
+      return content;
+    } catch (err) {
+      console.error(err);
+      return null;
     }
   }, []);
 
@@ -71,30 +103,10 @@ export function IssuesContextProvider({
   }, [fetchIssues]);
 
   return (
-    <IssuesContext.Provider value={{ issues, fetchIssues }}>
+    <IssuesContext.Provider
+      value={{ issues, fetchIssues, fetchExpecificIssue }}
+    >
       {children}
     </IssuesContext.Provider>
   );
 }
-
-// class IssueClass {
-//   private readonly totalCount: number;
-//   private readonly items: IssueItem[];
-
-//   constructor(totalCount: number, items: IssueItem) {
-//     this.totalCount = totalCount;
-//     this.items = items.map((item) => new IssueItem({ ...item }));
-//   }
-// }
-
-// class IssueItem {
-//   private readonly title: string;
-//   private readonly body: string;
-//   private readonly created_at: Date;
-
-//   constructor({ title, body, created_at }: IssueItem) {
-//     this.title = title;
-//     this.body = body;
-//     this.created_at = new Date(created_at);
-//   }
-// }

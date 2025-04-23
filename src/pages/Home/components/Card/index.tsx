@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { CardContainer } from "./styles";
 import { dateFormatter } from "../../../../utils/dateFormatter";
+import { formatStringToCard } from "../../../../utils/formatStringToCard";
 
 interface Issue {
+  id: number;
   title: string;
   body: string;
   createdAt: string;
@@ -15,7 +17,7 @@ interface CardProps {
 export function Card({ issue }: CardProps) {
   const navigate = useNavigate();
   function handleShowPost() {
-    navigate("/post/1");
+    navigate(`/post/${issue.id}`);
   }
 
   return (
@@ -27,7 +29,7 @@ export function Card({ issue }: CardProps) {
         </div>
       </header>
 
-      <p>{issue.body}</p>
+      <p>{formatStringToCard(issue.body)}</p>
     </CardContainer>
   );
 }
