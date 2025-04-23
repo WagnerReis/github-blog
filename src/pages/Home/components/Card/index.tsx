@@ -1,7 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { CardContainer } from "./styles";
 
-export function Card() {
+interface Issue {
+  title: string;
+  body: string;
+  createdAt: Date;
+}
+
+interface CardProps {
+  issue: Issue;
+}
+
+export function Card({ issue }: CardProps) {
   const navigate = useNavigate();
   function handleShowPost() {
     navigate("/post/1");
@@ -10,17 +20,13 @@ export function Card() {
   return (
     <CardContainer onClick={handleShowPost}>
       <header>
-        <strong>JavaScript data types and data structures</strong>
+        <strong>{issue.title}</strong>
         <div>
-          <span>Há 1 dia</span>
+          <span>{issue.createdAt.toISOString()}</span>
         </div>
       </header>
 
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in...
-      </p>
+      <p>{issue.body}</p>
     </CardContainer>
   );
 }
