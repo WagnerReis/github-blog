@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { CardContainer } from "./styles";
+import { dateFormatter } from "../../../../utils/dateFormatter";
 
 interface Issue {
   title: string;
   body: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 interface CardProps {
@@ -22,7 +23,7 @@ export function Card({ issue }: CardProps) {
       <header>
         <strong>{issue.title}</strong>
         <div>
-          <span>{issue.createdAt.toISOString()}</span>
+          <span>{dateFormatter(issue.createdAt)}</span>
         </div>
       </header>
 

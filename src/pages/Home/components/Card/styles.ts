@@ -47,5 +47,7 @@ export const CardContainer = styled.button`
 
     max-width: 22rem;
     margin-top: 1.25rem;
+
+    text-align: left;
   }
 `;

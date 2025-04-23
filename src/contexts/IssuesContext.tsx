@@ -11,6 +11,13 @@ interface IssueItem {
   id: number;
   title: string;
   body: string;
+  createdAt: Date;
+}
+
+interface IssueItemResponse {
+  id: number;
+  title: string;
+  body: string;
   created_at: Date;
 }
 
@@ -36,7 +43,6 @@ export function IssuesContextProvider({
   const [issues, setIssues] = useState<Issue>({ totalCount: 0, items: [] });
 
   const fetchIssues = useCallback(async (query: string = "") => {
-    console.log(query);
     try {
       const response = await api.get(
         `search/issues?q=${query}%20repo:WagnerReis/github-blog`,
@@ -44,7 +50,7 @@ export function IssuesContextProvider({
 
       const newIssue = {
         totalCount: response.data.total_count,
-        items: response.data.items.map((item: IssueItem) => {
+        items: response.data.items.map((item: IssueItemResponse) => {
           return {
             id: item.id,
             title: item.title,
