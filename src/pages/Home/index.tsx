@@ -1,3 +1,4 @@
+import { ProfileContextProvider } from "../../contexts/ProfileContext";
 import { useIssues } from "../../hooks/useIssues";
 import { Card } from "./components/Card";
 import { Profile } from "./components/Profile";
@@ -5,11 +6,12 @@ import { HomeContainer, MainHeader, CardGrid } from "./styles";
 
 export function Home() {
   const { issues } = useIssues();
-  console.log(issues);
 
   return (
     <HomeContainer>
-      <Profile />
+      <ProfileContextProvider>
+        <Profile />
+      </ProfileContextProvider>
 
       <MainHeader>
         <strong>Publicações</strong>
@@ -25,7 +27,7 @@ export function Home() {
               key={issue.id}
               issue={{
                 ...issue,
-                createdAt: new Date(issue.created_at.toString()),
+                createdAt: issue.createdAt.toString(),
               }}
             />
           );

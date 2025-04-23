@@ -16,6 +16,7 @@ export const ProfileContainer = styled.div`
 export const ProfileContent = styled.div`
   display: flex;
   gap: 2rem;
+  flex: 1;
 
   img {
     width: 9.25rem;
@@ -28,6 +29,8 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 100%;
 
   header {
     display: inherit;
@@ -62,7 +65,6 @@ export const Details = styled.div`
 
 export const Description = styled.span`
   color: ${(props) => props.theme["base-text"]};
-  margin-top: 0.5rem;
   font-size: 1rem;
   line-height: 1.6;
 `;

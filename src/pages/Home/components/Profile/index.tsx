@@ -9,8 +9,11 @@ import {
 } from "./styles";
 import { PiUsersFill } from "react-icons/pi";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { useProfile } from "../../../../hooks/useProfile";
 
 export function Profile() {
+  const { profileData } = useProfile();
+
   return (
     <ProfileContainer>
       <ProfileContent>
@@ -21,31 +24,29 @@ export function Profile() {
 
         <Details>
           <header>
-            <h2>Wagner Reis</h2>
-            <a href="https://github.com/WagnerReis" target="_blank">
+            <h2>{profileData.name}</h2>
+            <a href={profileData.url} target="_blank">
               <p>GITHUB</p>
               <FaArrowUpRightFromSquare size={12} />
             </a>
           </header>
 
-          <Description>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </Description>
+          <Description>{profileData.bio}</Description>
 
           <Info>
             <div>
               <FaGithub size={18} />
-              <p>WagnerReis</p>
+              <p>{profileData.login}</p>
             </div>
-            <div>
-              <FaBuilding size={18} />
-              <p>Freelancer</p>
-            </div>
+            {profileData.company && (
+              <div>
+                <FaBuilding size={18} />
+                <p>{profileData.company}</p>
+              </div>
+            )}
             <div>
               <PiUsersFill size={18} />
-              <p>10 seguidores </p>
+              <p>{profileData.followers} seguidores </p>
             </div>
           </Info>
         </Details>
